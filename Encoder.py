@@ -11,11 +11,12 @@ classes = 14
 
 class Encoder(tf.keras.Model):
     def __init__(self, classes=14, input_shape = (224, 224, 3)):
-        super(Encoder, self).__init__()
+        super(Encoder, self).__init__(trainable=False)
         model = tf.keras.applications.densenet.DenseNet121(weights=os.path.join(path, weight_file),
                             input_shape=input_shape,
                             classes=classes)
         self.model = tf.keras.Model(inputs=model.input, outputs=model.layers[-2].output)
+        self.model.trainable = False
 #         self.model.build(input_shape = input_shape)
         
     def call(self, x):

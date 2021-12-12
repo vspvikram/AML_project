@@ -41,6 +41,9 @@ class Dataset():
         
         
         return image1, image2, caption
+
+    def __len__(self):
+        return len(self.image1)
     
     def text_preprocess(self, capt):
         capt = capt.split()
